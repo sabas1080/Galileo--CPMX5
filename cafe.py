@@ -1,3 +1,7 @@
+#-*-Ejercicio basado en ejemplo de raspberry pi para carriots.com-*-
+#-*-@sabasacustico Julio 2014-*-
+
+
 #!/usr/local/bin/python2.7
     
 #-*-coding:utf8-*-
@@ -30,8 +34,8 @@ class Client(object):
  
 def main():
     ON = 1
-    DEVICE = "ID dispositivo"
-    APIKEY = "APIKEY de escritura"
+    DEVICE = "ID dispositivo" #-*-ID del dispositvo que asignas en carriots-*-
+    APIKEY = "APIKEY de escritura" #-*-Aqui debes colocar tu API KEY de carriot-*-
     lights=ON
     a=0; 
     client_carriots = Client (APIKEY)

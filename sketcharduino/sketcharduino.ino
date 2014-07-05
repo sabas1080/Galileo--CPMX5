@@ -1,32 +1,33 @@
-#include <SD.h> // The SD library is used to read a temporary file,
-                // where the py script stores an unread email count.
-                
+/*
+CAfetera inteligente reto Intel #CPMX5
+
+*/
 #define trigPin 2
 #define echoPin 3
 
 void setup() {
-  //initSDCard();  // Initializes the SD class
   Serial.begin (9600);
   pinMode(trigPin, OUTPUT_FAST);
   pinMode(echoPin, INPUT_FAST);
   pinMode(13, OUTPUT);
   digitalWrite(13,LOW);
 
-  // Connect to Galileo over telnet
+  // Conectar a Galileo via telnet
   //system("telnetd -l /bin/sh"); 
-  // Assign the IP address '192.168.1.78' to it
-  //system("ifconfig eth0 down");
-  //delay(1000);
-  //system("ifconfig eth0 up");
+ // Asgnar IP automatica DHCP
   system("ifconfig eth0 > /dev/ttyGS0");
- 
+  // Asgnar IP fija '192.168.1.78'
   //system("ifconfig eth0 192.168.1.78 netmask 255.255.255.0 up"); 
 }
 
 void loop() {
   
   char buffer[35];
-  //Serial.print(system("ifconfig eth0 > /dev/ttyGS0"));
+  //Para poder ver la IP asignada en el monitor serial
+  Serial.print(system("ifconfig eth0 > /dev/ttyGS0"));
+  
+  //Instrucciones para funcionamiento del sensor de distancia ultrasonico
+  //PuseIn actualmente no esta funcionando en Intel Galileo Jul 2014
   long duration, distance;
   
   digitalWrite(trigPin, LOW); // Added this line
@@ -48,16 +49,19 @@ void loop() {
     
     while(temperatura <900){
       
-      digitalWrite(13, HIGH);
-      temperatura=analogRead(0);
+      digitalWrite(13, HIGH); //Led integrad en la tarjeta indica que esta trabajando
+      
+      temperatura=analogRead(0); //Lectura actual de la temperatura
       Serial.println(temperatura);
-      String letras2=String(temperatura);
+      String letras2=String(temperatura); //Convertimos a String
       String letras1="python /media/realroot/cafe.py ";
-      String letras3=letras1+letras2;
-      letras3.toCharArray(buffer,35);
-      system(buffer);
+      String letras3=letras1+letras2; //Concatenamos string
+      letras3.toCharArray(buffer,35); //Convertimos a arreglo de caracteres
+      system(buffer); //Enviamos el arreglo de caracteres
     }
+    
     delay(500);
+    //Madamos la notificacion al smartphone
     system("node /media/realroot/notificacion.js");
     digitalWrite(13, LOW);
     Serial.println("Rico Cafe Listo");
@@ -66,6 +70,8 @@ void loop() {
   
 }
 
+//Funcion que emula PulseIn
+//Codigo encontrado en los foros de intel galileo
 unsigned long pulseIn2(uint8_t pin, uint8_t state) {
     unsigned long pulseWidth = 0;
     unsigned long loopCount = 0;
