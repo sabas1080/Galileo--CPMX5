@@ -1,0 +1,33 @@
+<!-- Ejemplo de como se muestra los datos online, para mas datos visite carriots.com-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- jQuery and Modernizr-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+
+</head>
+<body>
+
+<div id="carriots-graph" style="max-width: 500px;margin:auto;"></div>
+	<script src="https://www.carriots.com/js/graphs.js"></script>
+
+<script> 
+		var carriots = {
+			 'apikey' : 'apikey personal', 
+			 'mime' : 'image/svg+xml', 
+			 'type' : 'bar', 
+			 'axis[x]' : 'at',
+			 'axis[y]' : 'light', 
+			  'data[0]' : 'light',
+			  'query[device]': 'id del dispositvo', 
+			  'query[sort]': '_id', 
+			  'query[order]': 'desc', 
+			  'query[max]': '10' 
+			  };
+</script>
+
+</body>
+</html>

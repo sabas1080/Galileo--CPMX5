@@ -1,6 +1,8 @@
 /*
-CAfetera inteligente reto Intel #CPMX5
-
+  Cafetera inteligente para el Reto Intel #CPMX5
+  Julio 2014
+  @sabasacustico
+  theinventorhouse.org
 */
 #define trigPin 2
 #define echoPin 3
